@@ -12,9 +12,7 @@ class ExpenseForm extends Component {
       description: props.expense ? props.expense.description : "",
       amount: props.expense ? props.expense.amount.toString() : 0,
       notes: props.expense ? props.expense.notes : "",
-      createdAt: props.expense
-        ? moment().set("millisecond", props.expense.createdAt)
-        : moment(),
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
       focused: false,
       error: ""
     };
@@ -101,7 +99,10 @@ class ExpenseForm extends Component {
           ></textarea>
 
           {this.state.error && <p>{this.state.error}</p>}
-          <button type="submit">Add Expense</button>
+          <button type="submit">
+            {!this.props.expense && <span>Add Expense</span>}
+            {this.props.expense && <span>Update Expense</span>}
+          </button>
         </form>
       </div>
     );
