@@ -1,8 +1,10 @@
+import moment from "moment";
+
 const filtersInitialState = {
   text: "",
   sort: "date",
-  startDate: undefined,
-  endDate: undefined
+  startDate: moment().startOf("month"),
+  endDate: moment().endOf("month")
 };
 
 const filtersReducer = (state = filtersInitialState, action) => {

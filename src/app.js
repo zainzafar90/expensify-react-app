@@ -8,15 +8,17 @@ import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 
 import { addExpense } from "./actions/expenses";
-import { setFilterText } from "./actions/filters";
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: "Rent Bill" }));
-
-store.dispatch(addExpense({ description: "Coffee Bill" }));
- 
-setTimeout(() => store.dispatch(setFilterText("rent")), 2000);
+store.dispatch(
+  addExpense({
+    description: "Coffee Bill",
+    amount: 350,
+    createdAt: 1567100704192,
+    notes: 'Yo notes..'
+  })
+);
 
 const app = (
   <Provider store={store}>
