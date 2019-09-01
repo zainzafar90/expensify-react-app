@@ -3,10 +3,10 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import configureStore from "./configureStore";
-import AppRouter from "./routers/AppRouter";
+import AppRouter, { history } from "./routers/AppRouter";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
-import "./firebase/firebase";
+import { firebase } from "./firebase/firebase";
 import { startSetExpenses } from "./actions/expenses";
 
 const store = configureStore();
@@ -17,8 +17,26 @@ const app = (
   </Provider>
 );
 
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(app, document.getElementById("app"));
+    hasRendered = true;
+  }
+};
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(app, document.getElementById("app"));
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
+    });
+    if (history.location.pathname === "/") {
+      history.push("/dashboard");
+    }
+  } else {
+    renderApp();
+    history.push("/");
+  }
 });
