@@ -14,9 +14,6 @@ const Header = ({ startLogout }) => (
       <NavLink to="/create" activeClassName="active">
         Create
       </NavLink>
-      <NavLink to="/help" activeClassName="active">
-        Help
-      </NavLink>
       <button onClick={startLogout}>Logout</button>
     </div>
   </header>
