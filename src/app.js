@@ -6,19 +6,10 @@ import configureStore from "./configureStore";
 import AppRouter from "./routers/AppRouter";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
-
-import { addExpense } from "./actions/expenses";
+import "./firebase/firebase";
+import { startSetExpenses } from "./actions/expenses";
 
 const store = configureStore();
-
-store.dispatch(
-  addExpense({
-    description: "Coffee Bill",
-    amount: 350,
-    createdAt: 1567100704192,
-    notes: 'Yo notes..'
-  })
-);
 
 const app = (
   <Provider store={store}>
@@ -26,4 +17,8 @@ const app = (
   </Provider>
 );
 
-ReactDOM.render(app, document.getElementById("app"));
+ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(app, document.getElementById("app"));
+});
