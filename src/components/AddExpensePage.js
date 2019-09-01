@@ -9,7 +9,6 @@ const AddExpensePage = ({ dispatch, history }) => (
     Add Expense
     <ExpenseForm
       onSubmit={expense => {
-        console.log(expense);
         dispatch(startAddExpense(expense));
         history.push("/");
       }}
