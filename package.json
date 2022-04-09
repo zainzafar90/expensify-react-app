@@ -21,7 +21,7 @@
     "history": "^4.9.0",
     "jest": "^24.9.0",
     "live-server": "^1.2.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "node-sass": "^4.12.0",
     "normalize.css": "^8.0.1",
     "numeral": "^2.0.6",
